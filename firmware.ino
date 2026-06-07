@@ -1262,6 +1262,20 @@ uint8_t timer(uint16_t step)
   return frameMs;
 }
 
+uint8_t orangutankSparkle(uint16_t step)
+{
+  (void)step; 
+  setAllLeds(COLOR_OFF);
+  
+  uint8_t leftLed = randomLedIndex();
+  uint8_t rightLed = randomLedIndex() + 9;
+  
+  ledStrip.setPixelColor(leftLed, 30, 12, 0);
+  ledStrip.setPixelColor(rightLed, 30, 12, 0);
+  
+  ledStrip.show();
+  return 90;
+}
 
 int runAnimationMode(uint8_t mode, uint16_t step)
 {
@@ -1287,7 +1301,7 @@ int runAnimationMode(uint8_t mode, uint16_t step)
       return nuclearMode(4, 3, 12, 20, 255, 0, 2, 0, 250 ); // york rose
     case 8:
       if ((state & B00000001) != 0) { return 0; };
-      return policeMode(step);
+      return orangutankSparkle(step);
     case 9:
       return spinMode(step, 1, 0, 3, 0,0,3,75);
     case 10:
