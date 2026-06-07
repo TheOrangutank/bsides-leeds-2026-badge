@@ -1291,16 +1291,16 @@ int runAnimationMode(uint8_t mode, uint16_t step)
     case 4:
       return loopingEyes(step, 10, 0, 0);
     case 5:
-      if ((state & B00000111) != 0) { return 0; };
+      //if ((state & B00000111) != 0) { return 0; };
       return devsecopsMode(step);
     case 6:
-      if ((state & B00000010) != 0) { return 0; };
+      //if ((state & B00000010) != 0) { return 0; };
       return nuclearMode(step, 3, 0, 0, 0, 10, 20, 0, 150 );
     case 7:
-      if ((state & B00000100) != 0) { return 0; };
-      return nuclearMode(4, 3, 12, 20, 255, 0, 2, 0, 250 ); // york rose
+      //if ((state & B00000100) != 0) { return 0; };
+      return nuclearMode(4, 3, 30, 0, 0, 0, 2, 0, 250 ); // york rose - changed to lancashire rose
     case 8:
-      if ((state & B00000001) != 0) { return 0; };
+      //if ((state & B00000001) != 0) { return 0; };
       return orangutankSparkle(step);
     case 9:
       return spinMode(step, 1, 0, 3, 0,0,3,75);
@@ -1387,7 +1387,7 @@ void loop()
   enableRtcPtc();
 
   uint16_t animationStep = 0;
-  uint8_t animationMode = 5;
+  uint8_t animationMode = 8;
   uint32_t totalIntervalMs = 0;
 
   while (true) {
