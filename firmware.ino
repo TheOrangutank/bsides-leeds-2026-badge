@@ -1277,6 +1277,32 @@ uint8_t orangutankSparkle(uint16_t step)
   return 90;
 }
 
+uint8_t burningEmbers(uint16_t step)
+{
+  uint8_t cycle = step % 30;
+  uint8_t intensity = cycle;
+  if (intensity > 15) { intensity = 30 - intensity; }
+
+  setAllLeds(4, 0, 0);
+  
+  static uint8_t leftLed = 0;
+  static uint8_t rightLed = 9;
+
+  if (cycle == 0) {
+    leftLed = randomLedIndex();
+    rightLed = randomLedIndex() + 9;
+  }
+
+  uint8_t redHeat = 4 + intensity;
+  uint8_t greenHeat = intensity / 2;
+
+  ledStrip.setPixelColor(leftLed, redHeat, greenHeat, 0);
+  ledStrip.setPixelColor(rightLed, redHeat, greenHeat, 0);
+  
+  ledStrip.show();
+  return 40; 
+}
+
 int runAnimationMode(uint8_t mode, uint16_t step)
 {
   switch (mode) {
@@ -1287,7 +1313,7 @@ int runAnimationMode(uint8_t mode, uint16_t step)
     case 2:
       return loopingEyes(step, 0, 0, 10);
     case 3:
-      return knightRider(step, 10, 0, 0);
+      return burningEmbers(step);
     case 4:
       return loopingEyes(step, 10, 0, 0);
     case 5:
